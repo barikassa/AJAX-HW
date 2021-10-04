@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 8 -->
+    <button id="btn" onclick="loadDoc()" type="button">request</button>
+    <div id="div"></div>
+    <p id="p"></p>
+    <ul id="ul"></ul>
+
+
+    <script>
+        let div = document.getElementById("div");
+        let btn = document.getElementById("btn");
+        let ul = document.getElementById("ul");
+        let p = document.getElementById("p");
+
+        // function loadDoc() {
+        //     let xhttp = new XMLHttpRequest;
+        // xhttp.onreadystatechange=function(){
+        //     if(this.readyState === 4 && this.status === 200){
+        //      let responseSaver=this.responseText;
+        //      console.log(responseSaver);
+        //      JSON.parse(responseSaver).forEach(element => {
+        //          console.log(`id: ${element.userId} title: ${element.title} complited: ${element.completed}`);
+        //      });
+        //     }
+        // }
+        // xhttp.open("GET", "https://jsonplaceholder.typicode.com/todos");
+        // xhttp.send();
+        // };
+
+        // 9
+        // function loadDoc(){
+        //     let xhttp = new XMLHttpRequest;
+        //     xhttp.onreadystatechange=function(){
+        //         if(this.readyState === 4 && this.status === 200){
+        //             let dataXML=this.responseText;
+        //             console.log(dataXML);
+        //             JSON.parse(dataXML).forEach(element => {
+        //                 console.log(element);
+        //                 ul.innerHTML += `completed:${element.completed}<br>`
+        //             });
+
+        //         }
+        //     }
+        //     xhttp.open("GET","https://jsonplaceholder.typicode.com/todos");
+        //     xhttp.send();
+        // }
+
+        //11
+
+        function loadDoc() {
+
+            p.innerHTML += "loading";
+            let xhttp = new XMLHttpRequest;
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let saveJason = this.responseText;
+                    console.log(saveJason);
+                    let todosLength = JSON.parse(saveJason)
+                    todosLength.forEach((element,i) => {
+                        console.log(element);
+                        ul.innerHTML += `completed:<li id="${i}" onclick="ab(${i})">${element.completed}<br>title:${element.title}</li><br>`
+                        console.log(todosLength.length);
+                        console.log(element.title);
+
+                        p.innerHTML = " "
+                        
+                        //    ב
+                        
+                    });
+                    
+                    
+                    
+                    // setTimeout(function(){
+                        // alert("ppp")
+                        // },3000);
+                        
+                    }
+                }
+                xhttp.open("GET", "https://jsonplaceholder.typicode.com/todos");
+                xhttp.send();
+            }
+            ab=(el)=>{
+                document.getElementById(el).innerHTML="";
+
+            };
+            
+    </script>
+
+</body>
+
+</html>
